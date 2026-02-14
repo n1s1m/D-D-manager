@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "name": "D&D Character Manager Design System",
+    "description": "Single source of truth for styling and components. Use this file when building new features: follow exact tokens, component variants, and implementation checklist.",
+    "purpose": "Comprehensive guide for AI and developers to build new features with consistent styling. All values are exact; use these tokens and patterns rather than inventing new ones.",
+    "scope": "Apps: main, characters, shop. Shared UI: packages/ui-components (shadcn).",
+    "defaultTheme": "dark",
+    "cssVariablesLocation": "Each app: app/globals.css. Tokens are HSL triplets (no 'hsl()'); Tailwind wraps them as hsl(var(--name))."
+  },
+
+  "designPrinciples": {
+    "darkModeFirst": "Default to dark theme. Light theme is optional; support via .light on html. Prioritize readability on dark backgrounds.",
+    "tokenDriven": "Use CSS variables and Tailwind semantic colors (bg-background, text-foreground, etc.) everywhere. Do not hardcode hex/rgb in components.",
+    "consistency": "Same radius (--radius), spacing scale, and component variants across all apps. Import shared components from @repo/ui-components.",
+    "hierarchy": "Headings: bold, white/foreground. Body: text-foreground or text-muted-foreground. Use size/weight/color to establish hierarchy.",
+    "accessibility": "Maintain contrast; use focus-visible:ring-2 focus-visible:ring-ring. Respect prefers-reduced-motion where applicable."
+  },
+
+  "tokens": {
+    "cssVariables": {
+      "dark": {
+        "background": "224 40% 6%",
+        "foreground": "213 31% 94%",
+        "card": "224 30% 9%",
+        "card-foreground": "213 31% 94%",
+        "popover": "224 30% 9%",
+        "popover-foreground": "213 31% 94%",
+        "primary": "270 80% 55%",
+        "primary-foreground": "0 0% 100%",
+        "secondary": "222 25% 14%",
+        "secondary-foreground": "213 31% 94%",
+        "muted": "223 25% 14%",
+        "muted-foreground": "215 20% 65%",
+        "accent": "222 25% 14%",
+        "accent-foreground": "213 31% 94%",
+        "destructive": "0 65% 45%",
+        "destructive-foreground": "0 0% 98%",
+        "border": "220 18% 20%",
+        "input": "220 18% 20%",
+        "ring": "270 80% 55%",
+        "radius": "0.625rem",
+        "sidebar-background": "224 35% 7%",
+        "sidebar-foreground": "213 31% 94%",
+        "sidebar-primary": "270 80% 55%",
+        "sidebar-primary-foreground": "0 0% 100%",
+        "sidebar-accent": "222 25% 14%",
+        "sidebar-accent-foreground": "213 31% 94%",
+        "sidebar-border": "220 18% 20%",
+        "sidebar-ring": "270 80% 55%",
+        "chart-1": "270 80% 55%",
+        "chart-2": "190 90% 50%",
+        "chart-3": "30 100% 55%",
+        "chart-4": "280 90% 60%",
+        "chart-5": "340 75% 55%"
+      },
+      "light": {
+        "background": "0 0% 100%",
+        "foreground": "224 40% 12%",
+        "card": "0 0% 100%",
+        "card-foreground": "224 40% 12%",
+        "popover": "0 0% 100%",
+        "popover-foreground": "224 40% 12%",
+        "primary": "270 80% 45%",
+        "primary-foreground": "0 0% 100%",
+        "secondary": "220 14% 96%",
+        "secondary-foreground": "224 40% 12%",
+        "muted": "220 14% 96%",
+        "muted-foreground": "220 9% 46%",
+        "accent": "220 14% 96%",
+        "accent-foreground": "224 40% 12%",
+        "destructive": "0 84% 60%",
+        "destructive-foreground": "0 0% 98%",
+        "border": "220 13% 91%",
+        "input": "220 13% 91%",
+        "ring": "270 80% 45%",
+        "radius": "0.625rem",
+        "sidebar-background": "0 0% 98%",
+        "sidebar-foreground": "224 40% 12%",
+        "sidebar-primary": "270 80% 45%",
+        "sidebar-primary-foreground": "0 0% 100%",
+        "sidebar-accent": "220 14% 94%",
+        "sidebar-accent-foreground": "224 40% 12%",
+        "sidebar-border": "220 13% 91%",
+        "sidebar-ring": "270 80% 45%",
+        "chart-1": "270 80% 45%",
+        "chart-2": "190 80% 40%",
+        "chart-3": "30 90% 50%",
+        "chart-4": "280 80% 55%",
+        "chart-5": "340 75% 55%"
+      }
+    },
+    "tailwindTheme": {
+      "borderRadius": {
+        "lg": "var(--radius)",
+        "md": "calc(var(--radius) - 2px)",
+        "sm": "calc(var(--radius) - 4px)"
+      },
+      "colors": "All semantic colors (background, foreground, card, primary, secondary, muted, accent, destructive, border, input, ring, chart-1..5, sidebar-*) are mapped to hsl(var(--name)) in each app's tailwind.config.js. Use Tailwind classes (e.g. bg-primary, text-muted-foreground) rather than raw CSS."
+    }
+  },
+
+  "typography": {
+    "fonts": {
+      "sans": "Inter — applied via next/font, variable --font-sans. Use for body and default text.",
+      "heading": "Plus Jakarta Sans — variable --font-heading. Applied in globals.css to h1–h6."
+    },
+    "baseStyles": "body: bg-background text-foreground antialiased. All headings: font-family var(--font-heading), letter-spacing -0.025em.",
+    "scale": {
+      "h1": "text-3xl or text-4xl, font-bold to font-extrabold, text-foreground",
+      "h2": "text-2xl, font-bold, text-foreground",
+      "h3": "text-xl, font-semibold, text-foreground",
+      "body": "text-base md:text-sm, font-normal, text-foreground or text-muted-foreground, leading-normal",
+      "small": "text-sm text-muted-foreground",
+      "muted": "text-sm text-muted-foreground or text-xs text-muted-foreground"
+    },
+    "rules": "Prefer Tailwind typography classes that resolve to design tokens (e.g. text-foreground, text-muted-foreground). Do not hardcode font families in JSX except via existing CSS variables."
+  },
+
+  "spacing": {
+    "scale": "Use Tailwind spacing scale (1 = 0.25rem, 2 = 0.5rem, 4 = 1rem, 6 = 1.5rem, 8 = 2rem, 12 = 3rem, 16 = 4rem, 24 = 6rem).",
+    "sectionGap": "gap-16 or gap-24 between major sections",
+    "cardPadding": "p-6 for CardHeader/CardContent/CardFooter; p-4 minimum for compact panels",
+    "componentGap": "gap-2 to gap-4 for form groups; space-y-1.5 or space-y-2 for stacked labels/inputs"
+  },
+
+  "layout": {
+    "maxWidth": "max-w-5xl or max-w-7xl for main content; full width for hero/banners as needed",
+    "borderRadius": "Use rounded-lg for cards and panels (maps to var(--radius)); rounded-md for buttons and inputs (md = radius - 2px). Consistent rounded corners throughout."
+  },
+
+  "components": {
+    "button": {
+      "source": "packages/ui-components/components/ui/button.tsx",
+      "import": "from '@repo/ui-components' or workspace package path",
+      "baseClasses": "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      "variants": {
+        "default": "bg-primary text-primary-foreground hover:bg-primary/90",
+        "destructive": "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        "outline": "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        "ghost": "hover:bg-accent hover:text-accent-foreground",
+        "link": "text-primary underline-offset-4 hover:underline"
+      },
+      "sizes": {
+        "default": "h-10 px-4 py-2",
+        "sm": "h-9 rounded-md px-3",
+        "lg": "h-11 rounded-md px-8",
+        "icon": "h-10 w-10"
+      },
+      "usage": "Prefer <Button variant='default' | 'secondary' | 'outline' | 'ghost' | 'link' | 'destructive' size='default' | 'sm' | 'lg' | 'icon'>. Use default for primary CTAs."
+    },
+    "card": {
+      "source": "packages/ui-components/components/ui/card.tsx",
+      "structure": "Card (wrapper), CardHeader, CardTitle, CardDescription, CardContent, CardFooter",
+      "baseClasses": "Card: rounded-lg border bg-card text-card-foreground shadow-sm. CardHeader: flex flex-col space-y-1.5 p-6. CardTitle: text-2xl font-semibold leading-none tracking-tight. CardDescription: text-sm text-muted-foreground. CardContent: p-6 pt-0. CardFooter: flex items-center p-6 pt-0.",
+      "usage": "Use for content panels, forms, and list containers. Always use semantic subcomponents for consistent padding and typography."
+    },
+    "input": {
+      "source": "packages/ui-components/components/ui/input.tsx",
+      "baseClasses": "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+      "usage": "Use with Label. Pair with focus-visible ring; do not override border color for focus—ring handles it."
+    },
+    "label": {
+      "source": "packages/ui-components/components/ui/label.tsx",
+      "baseClasses": "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+      "usage": "Associate with form controls via htmlFor and id. Use text-muted-foreground only when intentionally de-emphasizing."
+    },
+    "badge": {
+      "source": "packages/ui-components/components/ui/badge.tsx",
+      "baseClasses": "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+      "variants": {
+        "default": "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        "secondary": "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        "destructive": "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        "outline": "text-foreground"
+      }
+    },
+    "separator": {
+      "source": "packages/ui-components/components/ui/separator.tsx",
+      "baseClasses": "shrink-0 bg-border. Horizontal: h-[1px] w-full. Vertical: h-full w-[1px].",
+      "usage": "Use for visual division between sections or list items; keep decorative unless adding aria attributes."
+    },
+    "tabs": {
+      "source": "packages/ui-components/components/ui/tabs.tsx",
+      "structure": "Tabs, TabsList, TabsTrigger, TabsContent",
+      "TabsList": "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
+      "TabsTrigger": "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ... data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+      "usage": "Active state uses background and foreground tokens; no custom active color."
+    },
+    "otherComponents": "packages/ui-components includes: accordion, alert, alert-dialog, avatar, breadcrumb, button-group, calendar, carousel, chart, checkbox, collapsible, command, context-menu, dialog, drawer, dropdown-menu, form, hover-card, input-otp, kbd, menubar, navigation-menu, pagination, popover, progress, radio-group, resizable, scroll-area, select, sheet, sidebar, skeleton, slider, switch, table, textarea, toggle, toggle-group, tooltip, etc. Use the same token-based patterns: bg-*, text-*, border-*, ring-ring, rounded-lg/rounded-md, focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2. Import from the shared package; do not duplicate component code in apps."
+  },
+
+  "effectsAndMotion": {
+    "focusRing": "Always use focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 (or ring-offset-background) for focusable elements.",
+    "transitions": "Prefer transition-colors or transition-all on interactive elements; keep duration default (150ms) unless design calls for emphasis.",
+    "shadows": "Use shadow-sm for cards; avoid heavy shadows. Elevation via bg-card and border is preferred."
+  },
+
+  "implementationChecklist": {
+    "newPageOrFeature": [
+      "Use layout and typography from this file; do not introduce new font families or color hex values.",
+      "Import UI from packages/ui-components. Use Button, Card, Input, Label, etc. with variants above.",
+      "Use semantic Tailwind classes: bg-background, text-foreground, text-muted-foreground, bg-card, border-border, etc.",
+      "Ensure focus states use ring-ring and ring-offset-background.",
+      "Use spacing scale (p-4, p-6, gap-4, space-y-2) and radius (rounded-lg, rounded-md) consistently.",
+      "If adding new globals or theme tokens, add them to app/globals.css and tailwind theme in sync with this file."
+    ],
+    "newComponent": [
+      "Prefer adding to packages/ui-components so all apps can use it.",
+      "Use cn() for class merging; use cva() for variants; rely on CSS variables for colors.",
+      "Document any new variant or size in this design-system.json."
+    ]
+  }
+}

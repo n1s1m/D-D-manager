@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "name": "Dark Fantasy / Gaming Design System",
+    "description": "High-level design guidelines for a dark-mode-first, modern UI with vibrant accents. Use this file to instruct AI or developers to replicate the look across the app.",
+    "references": "GameScribe (AI storytelling), crypto/finance dashboards, Wizard Casino (gaming)."
+  },
+
+  "designPrinciples": {
+    "darkModeFirst": "The entire interface is built on deep dark backgrounds. Default to dark; light mode is optional. Prioritize readability and visual impact in low-light.",
+    "vibrantAccentsOnDark": "Use bright, saturated accent colors sparingly against the dark canvas. Accents draw attention to CTAs, active states, and key data.",
+    "depthAndLayering": "Create hierarchy with subtle gradients, soft glows, and card elevation. Cards/panels sit slightly above the background; use borders or inner glow, not flat fills.",
+    "modernAndSleek": "Clean lines, ample negative space, contemporary typography. Avoid clutter; let elements breathe.",
+    "visualHierarchy": "Establish hierarchy through size, weight, and color: headings command attention (white, bold); body is readable (light gray); secondary content is muted.",
+    "consistency": "Apply the same radius, spacing scale, and component patterns everywhere. Rounded corners throughout.",
+    "engagement": "Use color and subtle motion (glows, gradients) to make the UI feel alive and premium without being noisy."
+  },
+
+  "color": {
+    "philosophy": "Deep charcoal/blue-black canvas with a few high-saturation accent colors. Text is high-contrast for accessibility.",
+    "backgrounds": {
+      "primary": "Deep charcoal or blue-black. HSL approx: 224 40% 6% or 220 20% 8%. Near #0A0815 to #1A1E2C.",
+      "secondary": "Slightly lighter for cards/panels. HSL approx: 224 30% 10% or 222 25% 12%. #1A1E2C, #272B3A.",
+      "elevated": "For modals, dropdowns. One step lighter than secondary, optional subtle inner glow."
+    },
+    "accents": {
+      "primary": "Vibrant purple/magenta for main CTAs and key highlights. HSL 270 80% 55% to 280 90% 60%. #8A2BE2, #A020F0.",
+      "secondary": "Electric blue for links, selected states. HSL 210 100% 56%. #00C8FF, #3A82F6.",
+      "success": "Bright green for positive values, success. #00FF00 range or #2ECC71.",
+      "warning": "Orange/amber for warnings, progress. #FF7A00, #FACC15.",
+      "destructive": "Red for errors, destructive actions. Softer in dark: HSL 0 70% 45%."
+    },
+    "text": {
+      "primary": "Off-white or pure white for headings and important content. #FFFFFF, #F0F0F0.",
+      "secondary": "Light gray for body. #CCCCCC, #AAAAAA, HSL 213 20% 85%.",
+      "muted": "Medium gray for labels, placeholders. #808080, HSL 213 10% 55%."
+    },
+    "borders": {
+      "default": "Subtle, dark. HSL 220 15% 22% or similar. Avoid bright borders except on focus (use ring/glow)."
+    }
+  },
+
+  "typography": {
+    "philosophy": "Modern, geometric sans-serif. Clean and legible; headings have presence; body is comfortable to read.",
+    "fontFamily": {
+      "sans": "Inter, Poppins, Montserrat, or similar. System fallback: ui-sans-serif, system-ui, sans-serif.",
+      "heading": "Same as sans or a slightly more distinctive sans (e.g. Plus Jakarta Sans). Bold for H1/H2."
+    },
+    "scale": {
+      "h1": "Large, bold, white. 2rem–2.5rem, font-weight 700–800.",
+      "h2": "Bold, white. 1.5rem–1.75rem.",
+      "h3": "Semi-bold, white or accent. 1.25rem.",
+      "body": "Regular, light gray. 0.875rem–1rem, line-height 1.5–1.6.",
+      "small": "Muted gray. 0.75rem–0.875rem."
+    },
+    "letterSpacing": "Slight negative on large headings (-0.025em to -0.03em). Normal for body.",
+    "lineHeight": "Generous for body (1.5–1.65). Tighter for display headings if desired."
+  },
+
+  "spacing": {
+    "philosophy": "Generous and consistent. Use a scale (e.g. 4, 8, 12, 16, 24, 32, 48, 64).",
+    "sectionGap": "Large vertical spacing between sections (e.g. 4rem–6rem).",
+    "cardPadding": "Comfortable internal padding: 1.25rem–1.5rem minimum for cards/panels.",
+    "componentGap": "Consistent gap between form elements, list items (0.75rem–1rem)."
+  },
+
+  "layout": {
+    "structure": "Card-based and modular. Content lives in rounded panels; sidebar (if any) is fixed, dark.",
+    "grid": "Flexible grid; two-column layouts for hero/content split. Collapse to single column on small screens.",
+    "maxWidth": "Constrain main content width for readability (e.g. 1280px); allow full-bleed for hero or banners.",
+    "borderRadius": "Rounded everywhere: 0.5rem–1rem for cards, 0.375rem–0.5rem for buttons and inputs. Softer than sharp."
+  },
+
+  "components": {
+    "buttons": {
+      "primary": "Rounded (0.5rem–0.75rem). Background: vibrant purple/magenta or gradient (purple–blue). White bold text. Optional subtle outer glow or shadow.",
+      "secondary": "Dark background, light border, white or light gray text. Same radius.",
+      "ghost": "Transparent, light text; hover: subtle background."
+    },
+    "inputs": {
+      "base": "Dark background (elevated), rounded corners, subtle border. Placeholder: muted gray; text: light.",
+      "focus": "Accent ring or glow (purple/blue), not heavy border."
+    },
+    "cards": {
+      "base": "Dark, slightly lighter than page background. Rounded (0.75rem–1rem). Optional subtle border or inner gradient for depth.",
+      "elevated": "Slightly more padding; optional soft shadow or glow for modals/popovers."
+    },
+    "navigation": {
+      "bar": "Dark, full-width. Logo left; primary CTA right. Optional thin top banner (accent color) for announcements.",
+      "sidebar": "Fixed, dark. Icons + labels; active item: accent background or left border."
+    },
+    "tabs": {
+      "active": "Accent background or strong accent underline. Inactive: muted text.",
+      "pill": "Pill-shaped container; active tab has solid or gradient fill."
+    },
+    "badgesAndPills": "Small radius; accent or muted background; high-contrast text."
+  },
+
+  "effects": {
+    "glow": "Use sparingly on primary CTAs or key metrics. Box-shadow with accent color, blurred.",
+    "gradients": "Purple-to-blue or purple-to-magenta for hero areas, buttons, or decorative backgrounds. Keep subtle on dark.",
+    "shadows": "Soft, dark shadows for elevation (e.g. 0 4px 24px rgba(0,0,0,0.4)). Avoid harsh black."
+  },
+
+  "motion": {
+    "philosophy": "Subtle and purposeful. Prefer short transitions (150–300ms) for hover/focus.",
+    "hover": "Slight brightness or scale; optional glow increase on buttons."
+  },
+
+  "accessibility": {
+    "contrast": "Ensure text on dark meets WCAG AA. White/light gray on dark blue-black typically passes.",
+    "focus": "Visible focus ring (accent color) for keyboard users.",
+    "reducedMotion": "Respect prefers-reduced-motion for animations."
+  },
+
+  "implementation": {
+    "cssVariables": "Define --background, --foreground, --primary, --secondary, --muted, --accent, --border, --radius in globals.css. Prefer HSL for theme switching.",
+    "darkDefault": "Default theme is dark. Use class 'light' on html for light mode if needed.",
+    "tailwind": "Map design tokens to Tailwind theme (colors, borderRadius, spacing). Include packages/ui-components in content for shared components."
+  }
+}
