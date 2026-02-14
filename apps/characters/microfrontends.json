@@ -1,0 +1,23 @@
+{
+  "$schema": "https://openapi.vercel.sh/microfrontends.json",
+  "applications": {
+    "dnd-characters": {
+      "development": {
+        "local": 3000,
+        "fallback": "dnd-characters.vercel.app"
+      }
+    },
+    "dnd-catalog": {
+      "development": {
+        "local": 3002,
+        "fallback": "dnd-catalog.vercel.app"
+      },
+      "routing": [
+        {
+          "group": "catalog",
+          "paths": ["/shop", "/shop/:path*", "/spells", "/spells/:path*"]
+        }
+      ]
+    }
+  }
+}

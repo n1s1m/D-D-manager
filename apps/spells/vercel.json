@@ -1,4 +1,0 @@
-{
-  "buildCommand": "pnpm --workspace-root exec turbo build --filter=dnd-spells",
-  "installCommand": "pnpm install"
-}

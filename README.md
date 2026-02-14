@@ -8,7 +8,7 @@ A microfrontends application for managing Dungeons & Dragons characters, items, 
 
 ### Description
 
-This monorepo contains a multi-zone microfrontends setup: a **main** shell app (auth, navigation) and three feature apps—**characters**, **shop**, and **spells**—each runnable independently or together via the main app. Data and auth are backed by Supabase.
+This monorepo contains a multi-zone microfrontends setup: **characters** is the default app (auth, home, login/signup, and character management); **catalog** is a single zone serving both **shop** (`/shop`) and **spells** (`/spells`). Data and auth are backed by Supabase.
 
 ### Features
 
@@ -23,7 +23,7 @@ This monorepo contains a multi-zone microfrontends setup: a **main** shell app (
 - **Framework**: Next.js 16 (App Router)
 - **Microfrontends**: Vercel Microfrontends (multi-zone)
 - **Database & Auth**: Supabase
-- **Forms**: React Hook Form + Zod (main app auth)
+- **Forms**: React Hook Form + Zod (auth in characters app)
 - **Styling**: Tailwind CSS, shadcn/ui (`@repo/ui-components`)
 - **Monorepo**: Turborepo, pnpm workspaces
 
@@ -50,19 +50,15 @@ This monorepo contains a multi-zone microfrontends setup: a **main** shell app (
    ```bash
    pnpm dev
    ```
-   - Main: http://localhost:3000  
-   - Characters: http://localhost:3001  
-   - Shop: http://localhost:3002  
-   - Spells: http://localhost:3003  
+   - Characters (default): http://localhost:3000  
+   - Catalog (shop + spells): http://localhost:3002  
 
-   Use the main app (3000) to log in and navigate to characters, shop, and spells (they are proxied when using the main app).
+   Use the characters app (3000) to log in and navigate to characters, shop, and spells (catalog is proxied for `/shop` and `/spells` when using the default app).
 
 4. **Run a single app** (from repo root)
    ```bash
-   cd apps/main && pnpm dev      # main on 3000
-   cd apps/characters && pnpm dev  # characters on 3001
-   cd apps/shop && pnpm dev        # shop on 3002
-   cd apps/spells && pnpm dev      # spells on 3003
+   cd apps/characters && pnpm dev  # default app on 3000
+   cd apps/catalog && pnpm dev     # catalog (shop + spells) on 3002
    ```
 
 5. **Build**
@@ -74,10 +70,8 @@ This monorepo contains a multi-zone microfrontends setup: a **main** shell app (
 
 ```
 apps/
-├── main/           # Shell: auth, login/signup, navigation
-├── characters/     # Character management, inventory, abilities, skills
-├── shop/           # Items catalog, purchase, embed modal
-└── spells/        # Spells catalog, add to character
+├── characters/     # Default app: auth, home, login/signup, character management, inventory, skills
+├── catalog/       # Shop (/shop) + Spells (/spells): items catalog, purchase, embed; spells catalog, add to character
 
 packages/
 ├── shared-types/   # Shared TypeScript types & schemas
@@ -94,7 +88,7 @@ packages/
 
 ### Опис
 
-Монорепо з мультизонною архітектурою мікрофронтендів: головний **main** (авторизація, навігація) та три окремі застосунки—**characters**, **shop**, **spells**—які можна запускати окремо або разом через головний застосунок. Дані та авторизація—Supabase.
+Монорепо з мультизонною архітектурою мікрофронтендів: **characters** — головний застосунок (авторизація, домашня сторінка, персонажі); **catalog** — одна зона для магазину (`/shop`) та заклинаннь (`/spells`). Дані та авторизація — Supabase.
 
 ### Можливості
 
@@ -109,7 +103,7 @@ packages/
 - **Фреймворк**: Next.js 16 (App Router)
 - **Мікрофронтенди**: Vercel Microfrontends (multi-zone)
 - **БД та авторизація**: Supabase
-- **Форми**: React Hook Form + Zod (авторизація в main)
+- **Форми**: React Hook Form + Zod (авторизація в characters)
 - **Стилі**: Tailwind CSS, shadcn/ui (`@repo/ui-components`)
 - **Монорепо**: Turborepo, pnpm workspaces
 
@@ -136,19 +130,15 @@ packages/
    ```bash
    pnpm dev
    ```
-   - Main: http://localhost:3000  
-   - Characters: http://localhost:3001  
-   - Shop: http://localhost:3002  
-   - Spells: http://localhost:3003  
+   - Characters (головний): http://localhost:3000  
+   - Catalog (магазин + заклинання): http://localhost:3002  
 
-   Через головний застосунок (3000) виконуйте вхід і переходи до characters, shop та spells (вони проксуються через main).
+   Через застосунок characters (3000) виконуйте вхід і переходи до characters, shop та spells.
 
 4. **Запуск одного застосунку** (з кореня репо)
    ```bash
-   cd apps/main && pnpm dev
    cd apps/characters && pnpm dev
-   cd apps/shop && pnpm dev
-   cd apps/spells && pnpm dev
+   cd apps/catalog && pnpm dev
    ```
 
 5. **Збірка**
@@ -160,10 +150,8 @@ packages/
 
 ```
 apps/
-├── main/           # Оболонка: авторизація, навігація
-├── characters/     # Персонажі, інвентар, навички
-├── shop/           # Каталог предметів, купівля
-└── spells/        # Каталог заклинаннь
+├── characters/     # Головний застосунок: авторизація, домашня, персонажі, інвентар, навички
+├── catalog/        # Магазин (/shop) + Заклинання (/spells): каталог предметів і заклинаннь
 
 packages/
 ├── shared-types/
