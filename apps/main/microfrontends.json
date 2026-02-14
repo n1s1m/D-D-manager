@@ -9,35 +9,29 @@
     },
     "dnd-characters": {
       "development": {
-        "local": 3001
+        "local": 3001,
+        "fallback": "dnd-characters.vercel.app"
       },
       "routing": [
-        {
-          "group": "characters",
-          "paths": ["/characters", "/characters/:path*"]
-        }
+        { "group": "characters", "paths": ["/characters", "/characters/:path*"] }
       ]
     },
     "dnd-shop": {
       "development": {
-        "local": 3002
+        "local": 3002,
+        "fallback": "dnd-shop.vercel.app"
       },
       "routing": [
-        {
-          "group": "shop",
-          "paths": ["/shop", "/shop/:path*"]
-        }
+        { "group": "shop", "paths": ["/shop", "/shop/:path*"] }
       ]
     },
     "dnd-spells": {
       "development": {
-        "local": 3003
+        "local": 3003,
+        "fallback": "dnd-spells.vercel.app"
       },
       "routing": [
-        {
-          "group": "spells",
-          "paths": ["/spells", "/spells/:path*"]
-        }
+        { "group": "spells", "paths": ["/spells", "/spells/:path*"] }
       ]
     }
   }
