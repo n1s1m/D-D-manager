@@ -2,6 +2,8 @@
 
 A microfrontends application for managing Dungeons & Dragons characters, items, spells, and shop—built with Next.js and Vercel Microfrontends.
 
+**Live demo:** [https://d-d-manager-characters.vercel.app/](https://d-d-manager-characters.vercel.app/)
+
 ---
 
 ## English
