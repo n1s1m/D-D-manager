@@ -21,8 +21,8 @@ export function rollMultiple(count: number, sides: number): { rolls: number[]; t
 export function rollDiceString(diceStr: string): { rolls: number[]; total: number } {
   const match = diceStr.trim().match(/^(\d+)d(\d+)(?:\s*\+\s*(\d+))?$/i);
   if (!match) return { rolls: [], total: 0 };
-  const count = Math.min(100, Math.max(0, parseInt(match[1], 10)));
-  const sides = Math.min(100, Math.max(1, parseInt(match[2], 10)));
+  const count = Math.min(100, Math.max(0, parseInt(match[1] ?? '0', 10)));
+  const sides = Math.min(100, Math.max(1, parseInt(match[2] ?? '0', 10)));
   const mod = match[3] ? parseInt(match[3], 10) : 0;
   const { rolls, total } = rollMultiple(count, sides);
   return { rolls, total: total + mod };

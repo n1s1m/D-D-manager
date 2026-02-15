@@ -9,7 +9,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "lib": ["DOM", "DOM.Iterable", "ESNext"]
   },
   "include": ["*.ts", "*.tsx", "components/**/*.ts", "components/**/*.tsx", "lib/**/*.ts"],
   "exclude": ["node_modules", "dist"]

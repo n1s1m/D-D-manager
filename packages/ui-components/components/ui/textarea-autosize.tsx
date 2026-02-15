@@ -5,8 +5,7 @@ import TextareaAutosizeLib from 'react-textarea-autosize';
 
 import { cn } from '../../lib/utils';
 
-export interface TextareaAutosizeProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaAutosizeProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'style'> {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   className?: string;

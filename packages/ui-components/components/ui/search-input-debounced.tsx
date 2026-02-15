@@ -36,7 +36,7 @@ export function SearchInputDebounced({
       type="search"
       placeholder={placeholder}
       value={searchInput}
-      onChange={(e) => setSearchInput(e.target.value)}
+      onChange={(e) => setSearchInput((e.target as HTMLInputElement).value)}
       className={className}
       {...rest}
     />

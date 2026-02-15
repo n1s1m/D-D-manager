@@ -1,6 +1,5 @@
 'use client';
 
-import { memo } from 'react';
 import { ImageWithPlaceholder } from './image-with-placeholder';
 
 export type TableCellImageProps = {

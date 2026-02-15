@@ -1,7 +1,6 @@
 'use client';
 
 import { memo, useState } from 'react';
-import Image from 'next/image';
 
 export type ImageWithPlaceholderProps = {
   /** Image URL; when null/undefined or when load fails, placeholder is shown */
@@ -27,14 +26,14 @@ export const ImageWithPlaceholder = memo(function ImageWithPlaceholder({
   const [error, setError] = useState(false);
   const url = src && !error ? src : placeholder;
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       src={url}
       alt={alt}
-      fill={fill}
       className={className}
       sizes={sizes}
-      priority={priority}
-      unoptimized
+      loading={priority ? 'eager' : 'lazy'}
+      style={fill ? { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' } : undefined}
       onError={() => setError(true)}
     />
   );

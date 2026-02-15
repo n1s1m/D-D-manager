@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useInfiniteSpells } from '@/lib/hooks/use-spells';
+import type { Spell } from 'shared-types';
 import type { SpellsFilters as SpellsFiltersType } from '@/lib/spell/api';
 import { LoadMoreSentinel } from '@/components/load-more-sentinel';
 import { SpellsTable } from './spells-table';
@@ -20,13 +21,14 @@ export default function SpellsPage() {
   const onFiltersChange = useCallback((next: SpellsFiltersType) => setFilters(next), []);
 
   const {
-    data: spells = [],
+    data: rawSpells = [],
     isLoading,
     error,
     hasNextPage,
     isFetchingNextPage,
     loadMoreRef,
   } = useInfiniteSpells(PAGE_SIZE, filters);
+  const spells = rawSpells as Spell[];
 
   if (isLoading) {
     return <SpellsListSkeleton />;

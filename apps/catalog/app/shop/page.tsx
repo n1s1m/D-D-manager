@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useInfiniteItems } from '@/lib/hooks/use-items';
 import { useEmbedCharacterGold, useEmbedBuy } from '@/lib/hooks/use-embed-shop';
+import type { Item } from 'shared-types';
 import type { ItemsFilters } from '@/lib/item/api';
 import { LoadMoreSentinel } from '@/components/load-more-sentinel';
 import { ItemsTable } from './items-table';
@@ -25,12 +26,13 @@ export default function ShopPage() {
   const handleBuy = useEmbedBuy(embed, characterId);
 
   const {
-    data: items = [],
+    data: rawItems = [],
     isLoading,
     hasNextPage,
     isFetchingNextPage,
     loadMoreRef,
   } = useInfiniteItems(PAGE_SIZE, filters);
+  const items = rawItems as Item[];
 
   if (isLoading) {
     return <ShopListSkeleton />;
