@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useInfiniteItems } from '@/lib/hooks/use-items';
 import { useEmbedCharacterGold, useEmbedBuy } from '@/lib/hooks/use-embed-shop';
 import type { ItemsFilters } from '@/lib/item/api';
+import { LoadMoreSentinel } from '@/components/load-more-sentinel';
 import { ItemsTable } from './items-table';
 import { ShopFilters } from './shop-filters';
 import { ShopListSkeleton } from './shop-list-skeleton';
@@ -65,11 +66,7 @@ export default function ShopPage() {
             characterGold={characterGold}
             onBuy={handleBuy}
           />
-          <div ref={loadMoreRef} className="min-h-8 flex items-center justify-center py-4">
-            {isFetchingNextPage && (
-              <p className="text-muted-foreground text-sm">Loading more...</p>
-            )}
-          </div>
+          <LoadMoreSentinel loadMoreRef={loadMoreRef} isFetchingNextPage={isFetchingNextPage} />
         </>
       )}
     </div>

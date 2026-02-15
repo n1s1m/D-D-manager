@@ -9,6 +9,7 @@ interface FormTextFieldProps<T extends FieldValues> {
   label: string;
   placeholder?: string;
   error?: string;
+  optional?: boolean;
   multiline?: boolean;
   multilineMinRows?: number;
 }
@@ -19,13 +20,17 @@ export function FormTextField<T extends FieldValues>({
   label,
   placeholder,
   error,
+  optional = false,
   multiline = false,
   multilineMinRows = 3,
 }: FormTextFieldProps<T>) {
   const id = String(name);
   return (
     <div>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id}>
+        {label}
+        {optional ? ' (optional)' : ''}
+      </Label>
       <Controller
         name={name}
         control={control}
@@ -43,7 +48,7 @@ export function FormTextField<T extends FieldValues>({
           ) : (
             <Input
               id={id}
-              value={field.value}
+              value={field.value ?? ''}
               onChange={(e) => field.onChange(e.target.value)}
               onBlur={field.onBlur}
               className="mt-1"

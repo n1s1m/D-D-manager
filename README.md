@@ -68,6 +68,16 @@ This monorepo contains a multi-zone microfrontends setup: **characters** is the 
    pnpm build
    ```
 
+6. **Tests** (characters app)
+   ```bash
+   cd apps/characters && pnpm test
+   ```
+   Uses Vitest; covers auth validation schemas (login/signup). Run `pnpm test:watch` for watch mode.
+
+7. **Auth & errors**
+   - Unauthenticated visits to `/characters` or `/characters/*` are redirected to `/login?redirectTo=...` via middleware (`@supabase/ssr`). After login, the user is sent back to the original path.
+   - Root `error.tsx` in characters and catalog catch React errors and show a "Something went wrong" UI with "Try again" and a link home / to shop.
+
 ### Project Structure
 
 ```

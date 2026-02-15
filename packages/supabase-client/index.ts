@@ -1,18 +1,27 @@
 import { createClient, type SupabaseClient, type User } from '@supabase/supabase-js';
+import { createBrowserClient } from '@supabase/ssr';
 
 let _client: SupabaseClient | null = null;
 
 /**
  * Returns a Supabase client singleton using NEXT_PUBLIC_SUPABASE_URL and
  * NEXT_PUBLIC_SUPABASE_ANON_KEY from the app that imports this package.
+ * In the browser uses createBrowserClient (session in cookies) so the proxy can read it.
  */
+function isBrowser(): boolean {
+  return typeof (globalThis as { window?: unknown }).window !== 'undefined';
+}
+
 export function getSupabase(): SupabaseClient {
   if (!_client) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
     const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '';
-    _client = createSupabaseClient(url, key);
+    const client = isBrowser()
+      ? createBrowserClient(url, key)
+      : createSupabaseClient(url, key);
+    _client = client;
   }
-  return _client;
+  return _client as SupabaseClient;
 }
 
 /** Supabase client instance (lazy singleton). Use this in app code. */

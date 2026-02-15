@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useInfiniteSpells } from '@/lib/hooks/use-spells';
 import type { SpellsFilters as SpellsFiltersType } from '@/lib/spell/api';
+import { LoadMoreSentinel } from '@/components/load-more-sentinel';
 import { SpellsTable } from './spells-table';
 import { SpellsFilters } from './spells-filters';
 import { SpellsListSkeleton } from './spells-list-skeleton';
@@ -60,11 +61,7 @@ export default function SpellsPage() {
       ) : (
         <>
           <SpellsTable data={spells} characterId={characterId} />
-          <div ref={loadMoreRef} className="min-h-8 flex items-center justify-center py-4">
-            {isFetchingNextPage && (
-              <p className="text-muted-foreground text-sm">Loading more...</p>
-            )}
-          </div>
+          <LoadMoreSentinel loadMoreRef={loadMoreRef} isFetchingNextPage={isFetchingNextPage} />
         </>
       )}
     </div>

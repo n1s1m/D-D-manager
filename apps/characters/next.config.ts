@@ -4,12 +4,6 @@ import { withVercelToolbar } from '@vercel/toolbar/plugins/next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   transpilePackages: ['supabase-client', 'shared-types', '@repo/ui-components'],
   turbopack: {},
   async rewrites() {
