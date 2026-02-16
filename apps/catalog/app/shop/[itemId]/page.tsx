@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from 'next/navigation';
 import { Button, ImageWithPlaceholder } from '@repo/ui-components';
 import { ItemDetailSkeleton } from './item-detail-skeleton';
 import { useItem } from '@/lib/hooks/use-item';
+import { useEmbedBuyPending } from '@/lib/hooks/use-embed-shop';
 import { getPublicStorageUrl as getItemImageUrl } from 'supabase-client';
 
 export default function ItemDetailPage() {
@@ -13,6 +14,7 @@ export default function ItemDetailPage() {
   const itemId = params.itemId as string;
   const characterId = searchParams.get('characterId');
   const embed = searchParams.get('embed') === 'true';
+  const isPendingBuy = useEmbedBuyPending(embed);
   const { data: item, isLoading, error } = useItem(itemId);
   const [characterGold, setCharacterGold] = useState<number | null>(null);
 
@@ -94,10 +96,10 @@ export default function ItemDetailPage() {
           <Button
             onClick={handleBuy}
             className="w-full"
-            disabled={!canAfford}
+            disabled={!canAfford || isPendingBuy}
             title={!canAfford ? 'Not enough gold' : undefined}
           >
-            Buy ({price} gp)
+            {isPendingBuy ? 'Buying...' : `Buy (${price} gp)`}
           </Button>
         ) : (
           <Button asChild className="w-full">

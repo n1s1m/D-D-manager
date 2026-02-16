@@ -32,6 +32,7 @@ interface ItemsTableProps {
   characterId?: string | null;
   embed?: boolean;
   characterGold?: number | null;
+  isPendingBuy?: boolean;
   onBuy?: (item: Item) => void;
 }
 
@@ -40,6 +41,7 @@ export function ItemsTable({
   characterId,
   embed,
   characterGold,
+  isPendingBuy,
   onBuy,
 }: ItemsTableProps) {
   const columns = [
@@ -81,10 +83,10 @@ export function ItemsTable({
             <Button
               size="sm"
               onClick={() => onBuy(item)}
-              disabled={!canAfford}
+              disabled={!canAfford || isPendingBuy}
               title={!canAfford ? 'Not enough gold' : undefined}
             >
-              Buy ({price} gp)
+              {isPendingBuy ? 'Buying...' : `Buy (${price} gp)`}
             </Button>
           );
         }

@@ -48,3 +48,26 @@ export function useEmbedBuy(
     [embed, characterId]
   );
 }
+
+/**
+ * Subscribes to parent window postMessage for BUY_PENDING when embed is true.
+ * Returns whether a buy operation is in progress.
+ */
+export function useEmbedBuyPending(embed: boolean): boolean {
+  const [isPendingBuy, setIsPendingBuy] = useState(false);
+
+  useEffect(() => {
+    if (!embed) return;
+
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === 'BUY_PENDING') {
+        setIsPendingBuy(Boolean(event.data.pending));
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [embed]);
+
+  return isPendingBuy;
+}

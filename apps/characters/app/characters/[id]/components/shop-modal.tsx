@@ -8,23 +8,36 @@ interface ShopModalProps {
   characterId: string;
   gold: number;
   onClose: () => void;
+  isPendingBuy?: boolean;
 }
 
-export function ShopModal({ open, characterId, gold, onClose }: ShopModalProps) {
+export function ShopModal({ open, characterId, gold, onClose, isPendingBuy = false }: ShopModalProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  const sendGold = useCallback(() => {
+  const sendToIframe = useCallback(() => {
     if (iframeRef.current?.contentWindow) {
       iframeRef.current.contentWindow.postMessage(
         { type: 'CHARACTER_GOLD', gold },
         window.location.origin
       );
+      iframeRef.current.contentWindow.postMessage(
+        { type: 'BUY_PENDING', pending: isPendingBuy },
+        window.location.origin
+      );
     }
-  }, [gold]);
+  }, [gold, isPendingBuy]);
 
   useEffect(() => {
-    if (open) sendGold();
-  }, [open, sendGold]);
+    if (open) sendToIframe();
+  }, [open, sendToIframe]);
+
+  useEffect(() => {
+    if (!open || !iframeRef.current?.contentWindow) return;
+    iframeRef.current.contentWindow.postMessage(
+      { type: 'BUY_PENDING', pending: isPendingBuy },
+      window.location.origin
+    );
+  }, [open, isPendingBuy]);
 
   if (!open) return null;
 
@@ -39,7 +52,7 @@ export function ShopModal({ open, characterId, gold, onClose }: ShopModalProps) 
           src={`/shop?characterId=${characterId}&embed=true`}
           className="w-full h-full border-0 rounded-lg"
           title="Shop"
-          onLoad={sendGold}
+          onLoad={sendToIframe}
         />
       </div>
     </div>

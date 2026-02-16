@@ -10,10 +10,6 @@ import { getEquippedArmor, getEquippedWeapon } from '@/lib/character/equipped';
 import { showD20RollToast } from '@/lib/dice-toast';
 import { rollD20 } from '@/lib/dice';
 import { useCharacters } from '@/lib/hooks/use-characters';
-import {
-  useCharacterInventoryActions,
-  type CharacterDetailInventoryActions,
-} from '@/lib/hooks/use-character-inventory-actions';
 
 export type CharacterDetailPageStatus = 'loading' | 'error' | 'success';
 
@@ -24,7 +20,6 @@ export interface CharacterDetailPageSuccess {
   effectiveAC: number;
   equippedArmor: ReturnType<typeof getEquippedArmor>;
   equippedWeapon: ReturnType<typeof getEquippedWeapon>;
-  inventoryActions: CharacterDetailInventoryActions;
   onAbilityRoll: (key: keyof CharacterStats) => void;
   onSkillRoll: (skillLabel: string, totalMod: number) => void;
   onSaveDescription: (value: string | null) => void;
@@ -50,7 +45,6 @@ export function useCharacterDetailPage(characterId: string): CharacterDetailPage
   const { data: character, isLoading, error } = getCharacter(characterId);
 
   const inventory = character?.inventory ?? [];
-  const inventoryActions = useCharacterInventoryActions(characterId, inventory);
 
   const onAbilityRoll = useCallback(
     (key: keyof CharacterStats) => {
@@ -102,7 +96,6 @@ export function useCharacterDetailPage(characterId: string): CharacterDetailPage
     effectiveAC,
     equippedArmor,
     equippedWeapon,
-    inventoryActions,
     onAbilityRoll,
     onSkillRoll,
     onSaveDescription,

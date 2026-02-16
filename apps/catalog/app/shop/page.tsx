@@ -3,7 +3,7 @@
 import { useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useInfiniteItems } from '@/lib/hooks/use-items';
-import { useEmbedCharacterGold, useEmbedBuy } from '@/lib/hooks/use-embed-shop';
+import { useEmbedCharacterGold, useEmbedBuy, useEmbedBuyPending } from '@/lib/hooks/use-embed-shop';
 import type { Item } from 'shared-types';
 import type { ItemsFilters } from '@/lib/item/api';
 import { LoadMoreSentinel } from '@/components/load-more-sentinel';
@@ -24,6 +24,7 @@ export default function ShopPage() {
 
   const characterGold = useEmbedCharacterGold(embed);
   const handleBuy = useEmbedBuy(embed, characterId);
+  const isPendingBuy = useEmbedBuyPending(embed);
 
   const {
     data: rawItems = [],
@@ -66,6 +67,7 @@ export default function ShopPage() {
             characterId={characterId}
             embed={embed}
             characterGold={characterGold}
+            isPendingBuy={isPendingBuy}
             onBuy={handleBuy}
           />
           <LoadMoreSentinel loadMoreRef={loadMoreRef} isFetchingNextPage={isFetchingNextPage} />

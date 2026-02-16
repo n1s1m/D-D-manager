@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import {
   PrefetchCrossZoneLinks,
   PrefetchCrossZoneLinksProvider,
@@ -17,6 +18,14 @@ export const metadata = {
   description: 'Browse items and spells for your D&D characters',
 };
 
+function LayoutLoadingFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="animate-pulse text-muted-foreground">Loading…</div>
+    </div>
+  );
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -27,7 +36,7 @@ export default function RootLayout({
       <body className={`${inter.className} ${plusJakarta.variable}`}>
         <QueryProvider>
           <PrefetchCrossZoneLinksProvider>
-            {children}
+            <Suspense fallback={<LayoutLoadingFallback />}>{children}</Suspense>
           </PrefetchCrossZoneLinksProvider>
           <PrefetchCrossZoneLinks />
           <SpeedInsights />

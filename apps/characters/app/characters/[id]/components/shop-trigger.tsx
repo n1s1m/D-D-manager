@@ -1,10 +1,14 @@
 'use client';
 
+import { Suspense, lazy } from 'react';
 import { Button, toast, Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@repo/ui-components';
 import { Store } from 'lucide-react';
-import { ShopModal } from './shop-modal';
 import { useCharacterItems } from '@/lib/hooks/use-character-items';
 import { useCharacterShop } from '@/lib/hooks/use-character-shop';
+
+const ShopModal = lazy(() =>
+  import('./shop-modal').then((m) => ({ default: m.ShopModal }))
+);
 
 interface ShopTriggerProps {
   characterId: string;
@@ -33,12 +37,23 @@ export function ShopTrigger({ characterId, gold }: ShopTriggerProps) {
           <TooltipContent>Open shop</TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      <ShopModal
-        open={shopOpen}
-        characterId={characterId}
-        gold={gold}
-        onClose={closeShop}
-      />
+      {shopOpen && (
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+              <div className="animate-pulse text-muted-foreground">Loading shop…</div>
+            </div>
+          }
+        >
+          <ShopModal
+            open={shopOpen}
+            characterId={characterId}
+            gold={gold}
+            onClose={closeShop}
+            isPendingBuy={buyItem.isPending}
+          />
+        </Suspense>
+      )}
     </>
   );
 }
